@@ -37,12 +37,19 @@ document.addEventListener("DOMContentLoaded", function() {
           alteratives.splice(n,1)
         }
 
+        // a function to fix special characters
+        function encodeHTML(html) {
+          var txt = document.createElement("textarea");
+          txt.innerHTML = html;
+          return txt.value;
+        };
+
 
         // create buttons for answers
         for (var j = 0; j < altRand.length; j++) {
           var button = document.createElement("input");
           button.type = "submit";
-          button.value = altRand[j];
+          button.value = encodeHTML(altRand[j]);
           button.setAttribute("class", "button")
           if (button.value == q.correct_answer) {
             button.setAttribute("id", "correct")
