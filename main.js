@@ -25,11 +25,20 @@ document.addEventListener("DOMContentLoaded", function() {
         var alteratives = q.incorrect_answers;
         alteratives.push(q.correct_answer);
 
+        // shuffle the alternativ, so the correct answers is not on index 3
+        var altRand = [];
+        for (var y = 4; y > 0; y--) {
+          var n = Math.floor(Math.random() * y);
+          var alt = alteratives[n]
+          altRand.push(alt)
+          alteratives.splice(n,1)
+        }
+
         // create buttons for answers
-        for (var j = 0; j < alteratives.length; j++) {
+        for (var j = 0; j < altRand.length; j++) {
           var button = document.createElement("input");
           button.type = "submit";
-          button.value = alteratives[j];
+          button.value = altRand[j];
           button.setAttribute("class", "button")
           if (button.value == q.correct_answer) {
             button.setAttribute("id", "correct")
@@ -54,7 +63,12 @@ function addEvents() {
   var buttons = document.getElementsByTagName("input");
   for (var x = 0; x < buttons.length; x++) {
     buttons[x].addEventListener("click", function() {
-      console.log(this.id);
+      if (this.id == "correct") {
+        this.style.backgroundColor = "Lightgreen";
+      }
+      else {
+        this.style.backgroundColor = "Lightcoral";
+      }
     });
   }
 }
