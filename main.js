@@ -3,9 +3,10 @@ var res;
 document.addEventListener("DOMContentLoaded", function() {
   var req = new XMLHttpRequest;
 
-  fetch("https://opentdb.com/api.php?amount=10&category=15&type=multiple")
-    .then(res => res.json()) // Transform the data into json
+  fetch("https://opentdb.com/api.php?amount=5&category=15&type=multiple")
+    .then(res => res.json()) // transform the data into json
     .then(function(res) {
+
 
       // get and create the html-elements
       var gameContainer = document.getElementById("content");
@@ -16,10 +17,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var q = res.results[i];
         // create an li for each question
         var qItem = document.createElement("li");
+        var qText = document.createElement("h3");
+        qItem.appendChild(qText);
 
         // print out the question
         var question = q.question;
-        qItem.innerHTML = question + "<br>";
+        qText.innerHTML = question;
 
         // put all the alternatives in one array
         var alteratives = q.incorrect_answers;
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
           altRand.push(alt)
           alteratives.splice(n,1)
         }
+
 
         // create buttons for answers
         for (var j = 0; j < altRand.length; j++) {
@@ -55,22 +59,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // create a place for the scorecounter
       var scoreCount = document.createElement("div");
+      var scoreText = document.createElement("h4");
+      scoreCount.setAttribute("id", "score-count")
       var score = 0;
-      scoreCount.innerHTML = score;
+      scoreText.innerHTML = score;
+      scoreCount.appendChild(scoreText)
       list.appendChild(scoreCount)
+
 
       // add eventlisteners on all the buttons
       function addEvents() {
         var buttons = document.getElementsByTagName("input");
         for (var i = 0; i < buttons.length; i++) {
           buttons[i].addEventListener("click", function() {
-            if (this.id == "correct") {
-              this.style.backgroundColor = "Lightgreen";
-              score++;
-              scoreCount.innerHTML = score;
-            }
-            else {
-              this.style.backgroundColor = "Lightcoral";
+            // if the question is answered, nothing will happen to the buttons
+            if (this.parentNode.className != "answered") {
+              if (this.id == "correct") {
+                this.style.backgroundColor = "Lightgreen";
+                score++;
+                scoreText.innerHTML = score;
+              }
+              else {
+                this.style.backgroundColor = "Lightcoral";
+              }
+              this.parentNode.setAttribute("class", "answered");
             }
           });
         }
