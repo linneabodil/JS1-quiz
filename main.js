@@ -53,22 +53,31 @@ document.addEventListener("DOMContentLoaded", function() {
       // add the list to the div in the html
       gameContainer.appendChild(list);
 
+      // create a place for the scorecounter
+      var scoreCount = document.createElement("div");
+      var score = 0;
+      scoreCount.innerHTML = score;
+      list.appendChild(scoreCount)
+
+      // add eventlisteners on all the buttons
+      function addEvents() {
+        var buttons = document.getElementsByTagName("input");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function() {
+            if (this.id == "correct") {
+              this.style.backgroundColor = "Lightgreen";
+              score++;
+              scoreCount.innerHTML = score;
+            }
+            else {
+              this.style.backgroundColor = "Lightcoral";
+            }
+          });
+        }
+      }
+
       addEvents();
+
+
   });
 });
-
-
-// add eventlisteners on all the buttons
-function addEvents() {
-  var buttons = document.getElementsByTagName("input");
-  for (var x = 0; x < buttons.length; x++) {
-    buttons[x].addEventListener("click", function() {
-      if (this.id == "correct") {
-        this.style.backgroundColor = "Lightgreen";
-      }
-      else {
-        this.style.backgroundColor = "Lightcoral";
-      }
-    });
-  }
-}
