@@ -5,17 +5,18 @@
 }
 body {
   background-color: Linen;
-}
-#content {
-  width: 920px;
-  margin: 30px;
-  padding: 30px;
+  width: 1050px;
 }
 h1 {
   font-family: Montserrat;
   font-size: 40px;
-  margin-bottom: 30px;
+  margin: 30px 0px;
   text-align: center;
+}
+
+.container {
+  margin: 30px;
+  padding: 30px;
 }
 
 /* indiviual questions */
