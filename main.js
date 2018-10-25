@@ -2,7 +2,7 @@ var res;
 
 document.addEventListener("DOMContentLoaded", function() {
   var req = new XMLHttpRequest;
-  var url = "https://opentdb.com/api.php?amount=10&type=multiple";
+  var url = "https://opentdb.com/api.php?amount=5&type=multiple";
 
   // add eventlisteners on all the categorybuttons
   function catEvents() {

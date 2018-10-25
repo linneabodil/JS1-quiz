@@ -4,48 +4,64 @@
   padding: 0;
 }
 body {
-  background-color: Linen;
-  width: 1050px;
+  background-color: LightSteelBlue;
+  width: 100%;
 }
+#wrapper {
+  width: 770px;
+  margin: auto;
+}
+
 h1 {
   font-family: Montserrat;
   font-size: 40px;
   margin: 30px 0px;
   text-align: center;
 }
-
 .container {
-  margin: 30px;
+  width: 770px;
+  margin: 0px 30px;
   padding: 30px;
+}
+h2 {
+  font-family: Montserrat;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-left: 10px;
 }
 
 ul#level {
-  width: 700px;
   margin: auto;
 }
-
 #level input, #cat input {
   width: 160px;
   border-radius: 0px;
 }
 
+#start {
+  width: 200px;
+  display: block;
+  margin: 20px auto;
+}
+
 /* indiviual questions */
 li {
+  background-color: #eee;
   margin-bottom: 30px;
+  padding: 20px;
+  box-shadow: 5px 5px rgba(0, 0, 0, .3);
 }
 h3 {
   font-family: Open Sans;
-  font-size: 14px;
-  margin: 5px 15px;
+  font-size: 18px;
+  margin: 5px 10px;
 }
 input {
-  background-color: Gainsboro;
-  width: 220px;
+  width: 350px;
   padding: 10px;
   margin: 5px;
-  border: 2px solid White;
-  border-radius: 10px;
-  font-size: 12px;
+  border: 2px solid Black;
+  font-size: 14px;
 }
 input:hover {
   background-color: White;
@@ -53,10 +69,10 @@ input:hover {
 
 /* counter */
 #score-count {
+  background-color: SteelBlue;
   width: 75px;
   height: 50px;
-  background-color: lightSteelBlue;
-  border: 2px solid White;
+  border: 2px solid Black;
   border-radius: 15px;
   margin: auto;
 }
