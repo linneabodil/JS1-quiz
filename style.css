@@ -19,6 +19,16 @@ h1 {
   padding: 30px;
 }
 
+ul#level {
+  width: 700px;
+  margin: auto;
+}
+
+#level input, #cat input {
+  width: 160px;
+  border-radius: 0px;
+}
+
 /* indiviual questions */
 li {
   margin-bottom: 30px;

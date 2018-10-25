@@ -2,30 +2,60 @@ var res;
 
 document.addEventListener("DOMContentLoaded", function() {
   var req = new XMLHttpRequest;
-  var url = "https://opentdb.com/api.php?amount=10";
+  var url = "https://opentdb.com/api.php?amount=10&type=multiple";
+
+  // add eventlisteners on all the categorybuttons
+  function catEvents() {
+    var cat = document.getElementById("cat").childNodes;
+    for (var i = 0; i < cat.length; i++) {
+      cat[i].addEventListener("click", function() {
+        if (this.parentNode.className != "answered") {
+          this.style.backgroundColor = "Silver";
+          if (this.value == "Video games") {
+            url += "&category=15"
+          } else if(this.value == "Board games") {
+            url += "&category=16"
+          } else if (this.value == "Anime & Manga") {
+            url += "&category=31"
+          } else if (this.value == "Cartoon") {
+            url += "&category=32"
+          }
+          this.parentNode.setAttribute("class", "answered");
+        }
+      });
+    }
+  }
+  catEvents();
 
   // add eventlisteners on all the levelbuttons
   function levelEvents() {
     var levels = document.getElementById("level").childNodes;
     for (var i = 0; i < levels.length; i++) {
       levels[i].addEventListener("click", function() {
-        this.style.backgroundColor = "#eee";
-        if (this.value == "Easy") {
-          url += "&difficulty=easy"
-        } if (this.value == "Medium") {
-          url += "&difficulty=medium"
-        } if (this.value == "Hard") {
-          url += "&difficulty=hard"
+        if (this.parentNode.className != "answered") {
+          this.style.backgroundColor = "Silver";
+          if (this.value == "Easy") {
+            url += "&difficulty=easy"
+          } if (this.value == "Medium") {
+            url += "&difficulty=medium"
+          } if (this.value == "Hard") {
+            url += "&difficulty=hard"
+          }
+          this.parentNode.setAttribute("class", "answered");
         }
-        writeQuiz(url)
       });
     }
   }
   levelEvents();
 
+  // fix the startbutton
+  document.getElementById("start").addEventListener("click", function() {
+    writeQuiz(url);
+  })
 
   // print out the quiz on the page
   function writeQuiz(url) {
+    console.log(url)
     fetch(url)
       .then(res => res.json()) // transform the data into json
       .then(function(res) {
@@ -116,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
           }
         }
-
         answEvents();
 
 
