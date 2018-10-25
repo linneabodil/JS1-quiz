@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // get and create the html-elements
         var gameContainer = document.getElementById("content");
+        // replace all questions if quiz already exists
+        if (gameContainer.childNodes.length > 0) {
+          gameContainer.removeChild(gameContainer.childNodes[0]);
+        }
         var list = document.createElement("ul");
         list.setAttribute("id", "list");
 
