@@ -148,10 +148,6 @@ document.addEventListener("DOMContentLoaded", function() {
             qItem.appendChild(button)
           }
 
-          var right = document.createElement("p");
-          right.innerHTML = q.correct_answer;
-          qItem.appendChild(right)
-
           // add the question to the list
           list.appendChild(qItem);
         }
@@ -168,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function() {
         scoreCount.appendChild(scoreText)
         list.appendChild(scoreCount)
 
-
         // add eventlisteners on all the answerbuttons
         function answEvents() {
           var buttons = document.getElementsByClassName("button");
@@ -183,6 +178,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
                   this.style.backgroundColor = "Lightcoral";
+                  var siblings = this.parentNode.children;
+                  var corr = siblings.correct;
+                  corr.style.backgroundColor = "rgba(144, 238, 144, 0.5)";
+                  corr.style.transition = "1s"
                 }
                 this.parentNode.setAttribute("class", "answered");
               }
