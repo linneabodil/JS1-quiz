@@ -5,22 +5,19 @@
 }
 body {
   background-color: LightSteelBlue;
-  width: 100%;
 }
 #wrapper {
   width: 770px;
   margin: auto;
 }
-
 h1 {
   font-family: Montserrat;
   font-size: 40px;
+  display: block;
   margin: 30px 0px;
   text-align: center;
 }
 .container {
-  width: 770px;
-  margin: 0px 30px;
   padding: 30px;
 }
 h2 {
@@ -29,19 +26,30 @@ h2 {
   margin-top: 20px;
   margin-left: 10px;
 }
-
-ul#level {
-  margin: auto;
+.choosen {
+  background-color: Silver;
 }
-#level input, #cat input {
+#choices {
+  display: block;
+}
+#choices ul {
+  margin: auto;
+  float: left;
+}
+#choices input {
   width: 160px;
   border-radius: 0px;
 }
-
+#number {
+  padding-left: 5px;
+}
 #start {
   width: 200px;
   display: block;
-  margin: 20px auto;
+  margin: 30px auto;
+}
+#start:active {
+  background-color: SteelBlue;
 }
 
 /* indiviual questions */
@@ -57,14 +65,11 @@ h3 {
   margin: 5px 10px;
 }
 input {
-  width: 350px;
+  width: 320px;
   padding: 10px;
   margin: 5px;
   border: 2px solid Black;
   font-size: 14px;
-}
-input:hover {
-  background-color: White;
 }
 
 /* counter */

@@ -3,6 +3,8 @@ var res;
 document.addEventListener("DOMContentLoaded", function() {
   var req = new XMLHttpRequest;
   var url = "https://opentdb.com/api.php?amount=5&type=multiple";
+  // help to choose numbers of questions
+  var oldNum;
 
   // add eventlisteners on all the categorybuttons
   function catEvents() {
@@ -10,17 +12,25 @@ document.addEventListener("DOMContentLoaded", function() {
     for (var i = 0; i < cat.length; i++) {
       cat[i].addEventListener("click", function() {
         if (this.parentNode.className != "answered") {
-          this.style.backgroundColor = "Silver";
           if (this.value == "Video games") {
             url += "&category=15"
           } else if(this.value == "Board games") {
             url += "&category=16"
           } else if (this.value == "Anime & Manga") {
             url += "&category=31"
-          } else if (this.value == "Cartoon") {
+          } else if (this.value == "Cartoons") {
             url += "&category=32"
+          } else if (this.value == "Television") {
+            url += "&category=14"
+          } else if (this.value == "Music") {
+            url += "&category=12"
+          } else if (this.value == "Film") {
+            url += "&category=11"
+          } else if (this.value == "Musicals") {
+            url += "&category=13"
           }
           this.parentNode.setAttribute("class", "answered");
+          this.setAttribute("class", "choosen")
         }
       });
     }
@@ -33,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
     for (var i = 0; i < levels.length; i++) {
       levels[i].addEventListener("click", function() {
         if (this.parentNode.className != "answered") {
-          this.style.backgroundColor = "Silver";
           if (this.value == "Easy") {
             url += "&difficulty=easy"
           } if (this.value == "Medium") {
@@ -42,20 +51,47 @@ document.addEventListener("DOMContentLoaded", function() {
             url += "&difficulty=hard"
           }
           this.parentNode.setAttribute("class", "answered");
+          this.setAttribute("class", "choosen")
         }
       });
     }
   }
   levelEvents();
 
-  // fix the startbutton
+  // startbutton, and all that should happen when you press it
   document.getElementById("start").addEventListener("click", function() {
+
+    // reset the choicesbuttons
+    document.getElementById("cat").setAttribute("class", "")
+    document.getElementById("level").setAttribute("class", "")
+    var inputs = document.getElementsByTagName("input");
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].setAttribute("class", "")
+    }
+
+    // change numbers of questions
+    var number = "";
+    number = document.getElementById("num").value;
+    numStr = "amount=";
+    numStr += number;
+    // check if requested number is a number
+    if (number != "") {
+      if (oldNum == undefined) {
+        oldNum = "amount=5";
+      }
+      number = Number.parseInt(number);
+      if (Number.isInteger(number)) {
+        url = url.replace(oldNum, numStr);
+      }
+    }
+    oldNum = numStr;
+
+    // call the function to print the quiz
     writeQuiz(url);
-  })
+  });
 
   // print out the quiz on the page
   function writeQuiz(url) {
-    console.log(url)
     fetch(url)
       .then(res => res.json()) // transform the data into json
       .then(function(res) {
@@ -100,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
             return txt.value;
           };
 
-
           // create buttons for answers
           for (var j = 0; j < altRand.length; j++) {
             var button = document.createElement("input");
@@ -113,11 +148,15 @@ document.addEventListener("DOMContentLoaded", function() {
             qItem.appendChild(button)
           }
 
+          var right = document.createElement("p");
+          right.innerHTML = q.correct_answer;
+          qItem.appendChild(right)
+
           // add the question to the list
           list.appendChild(qItem);
         }
 
-        // add the list to the div in the html
+        // add the list with the questions to the div in the html
         gameContainer.appendChild(list);
 
         // create a place for the scorecounter
@@ -151,11 +190,6 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
         answEvents();
-
-
     });
-
-
   }
-
 });
